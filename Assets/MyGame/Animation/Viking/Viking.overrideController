@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Viking
+  m_Controller: {fileID: 9100000, guid: 02853fd1415b0c04c95a61868f787a6d, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: c61d1e07a93921148ac17023035e9dff, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 843d50451674a0b45a2cce8fa1ce6225, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: b3e08dbb3ec374543bcae4c0274d07a4, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: c04539b73a89d3b4fa35d33d625a4cd3, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: a967265394f682945a2502abf2e19ec9, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: a57c453d1831d0a43b7ff8a2399272c3, type: 3}

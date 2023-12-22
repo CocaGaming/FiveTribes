@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Asian
+  - Viking
+  - Orc
+  - Tungus
+  - Titan
+  - HealBuffSkill
   layers:
   - Default
   - TransparentFX
@@ -11,14 +17,14 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Asian
+  - Viking
+  - Orc
+  - Tungus
+  - Titan
+  - Arrow
+  - Bow
+  - HealBuffSkill
   - 
   - 
   - 

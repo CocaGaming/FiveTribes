@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ArrowController : MonoBehaviour
+{
+    [SerializeField]
+    private Rigidbody arrowRB;
+    public float arrowSpeed;
+    public Vector3 moveDirection;
+
+    public int attackDamage;
+    private GameObject getHitEffect;
+    public GameObject getHitByWeaponEffect;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        arrowRB =GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        arrowRB.velocity=moveDirection*arrowSpeed;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Orc")|| other.CompareTag("Asian")|| other.CompareTag("Viking"))
+        {
+            other.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, other.GetComponentInParent<PlayerAttributes>().defencePoint);
+            getHitEffect = Instantiate(getHitByWeaponEffect, other.transform);
+            Destroy(getHitEffect, 2f);
+        }
+        Destroy(gameObject);
+    }
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject,5f);
+    }
+    public void SetMoveDirection(Vector3 direction)
+    {
+        moveDirection=direction;
+    }
+}
