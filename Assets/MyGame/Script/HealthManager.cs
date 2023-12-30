@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HealthManager : MonoBehaviour
 {
@@ -82,6 +83,14 @@ public class HealthManager : MonoBehaviour
         if(this.GetComponent<PlayerInputManager>() != null)
         {
             GetComponent<PlayerInputManager>().enabled = false;
+        }
+        if(this.GetComponent<NavMeshAgent>() != null)
+        {
+            GetComponent<NavMeshAgent>().enabled = false;
+        }
+        if(this.GetComponent<EnemyAI>() != null)
+        {
+            GetComponent<EnemyAI>().enabled = false;
         }
         GetComponentInChildren<CapsuleCollider>().enabled = false;
     }

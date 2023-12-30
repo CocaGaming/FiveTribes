@@ -60,6 +60,8 @@ public class PlayerInputManager : MonoBehaviour
         currentStamina = maxStamina;
         playerAnim=GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+        attackSpeed = waitToNextAttack;
+        skillSpeed = waitToNextSkill;
     }
 
     // Update is called once per frame
@@ -244,9 +246,9 @@ public class PlayerInputManager : MonoBehaviour
         //{
         //    Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         //}
-        if (skillPoint != null)
-        {
-            Gizmos.DrawWireSphere(skillPoint.position, skillRange);
-        }
+        //if (skillPoint != null)
+        //{
+        //    Gizmos.DrawWireSphere(skillPoint.position, skillRange);
+        //}
     }
 }

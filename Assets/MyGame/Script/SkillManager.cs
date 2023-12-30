@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SkillManager : MonoBehaviour
 {
@@ -69,7 +70,14 @@ public class SkillManager : MonoBehaviour
         {
             if(value is Collider enemy)
             {
-                enemy.GetComponentInParent<CharacterController>().enabled=false;
+                if (ListenerManager.HasInstance)
+                {
+                    Animator enemyAnim = enemy.GetComponentInParent<Animator>();
+                    ListenerManager.Instance.BroadCast(ListenType.PLAYER_IDLE, enemyAnim);
+                }
+                enemy.GetComponentInParent<CharacterController>().enabled = false;
+                enemy.GetComponentInParent<NavMeshAgent>().enabled = false;
+                enemy.GetComponentInParent<EnemyAI>().enabled = false;
                 StartCoroutine(SetDefaultSkillViking(enemy));
             }
         }
@@ -80,6 +88,8 @@ public class SkillManager : MonoBehaviour
         if (enemy != null)
         {
             enemy.GetComponentInParent<CharacterController>().enabled = true;
+            enemy.GetComponentInParent<NavMeshAgent>().enabled = true;
+            enemy.GetComponentInParent<EnemyAI>().enabled = true;
         }
     }
     private void OnSkillVikingChieftainEffect(object value)
