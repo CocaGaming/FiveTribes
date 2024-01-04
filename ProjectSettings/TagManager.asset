@@ -10,6 +10,16 @@ TagManager:
   - Tungus
   - Titan
   - HealBuffSkill
+  - Death
+  - VikingCount
+  - AsianCount
+  - OrcCount
+  - TungusCount
+  - TitanCount
+  - VikingArrow
+  - AsianArrow
+  - OrcArrow
+  - TitanArrow
   layers:
   - Default
   - TransparentFX

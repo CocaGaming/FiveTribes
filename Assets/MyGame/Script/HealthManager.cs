@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -78,7 +79,6 @@ public class HealthManager : MonoBehaviour
     }
     public void OnDeath()
     {
-        this.enabled = false;
         GetComponent<CharacterController>().enabled = false;
         if(this.GetComponent<PlayerInputManager>() != null)
         {
@@ -92,6 +92,11 @@ public class HealthManager : MonoBehaviour
         {
             GetComponent<EnemyAI>().enabled = false;
         }
-        GetComponentInChildren<CapsuleCollider>().enabled = false;
+        Collider[] collider= this.GetComponentsInChildren<Collider>();
+        foreach(Collider col in collider)
+        {
+            col.enabled = false;
+        }
+        this.gameObject.tag = "Death";//Set tag để AICounter trừ ra khi chết
     }
 }

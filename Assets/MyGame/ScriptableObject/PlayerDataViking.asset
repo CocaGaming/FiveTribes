@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerDataViking
   m_EditorClassIdentifier: 
   playerData:
-    healthPoint: 10
+    healthPoint: 20
     staminaPoint: 5
     attackPoint: 5
     defencePoint: 5

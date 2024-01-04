@@ -51,6 +51,8 @@ public class EnemyAI : MonoBehaviour
     public Transform arena;
     public float arenaZone;
 
+    private float resetWalkPointSet;
+
     private void Start()
     {
         PlayerAttributes playerAttributes = GetComponent<PlayerAttributes>();
@@ -63,6 +65,7 @@ public class EnemyAI : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         attackSpeed = waitToNextAttack;
         skillSpeed = waitToNextSkill;
+        resetWalkPointSet = 20f;
     }
     private void Update()
     {
@@ -72,43 +75,72 @@ public class EnemyAI : MonoBehaviour
         enemyInSkillRange=Physics.CheckSphere(transform.position,skillRange, enemyLayer);
         aiInBaseCamp = Physics.CheckSphere(baseCamp.position, baseCampZone,allyLayer);
         aiInArena = Physics.CheckSphere(arena.position, arenaZone,allyLayer);
-        Debug.Log($"Basecamp: {aiInBaseCamp}");
-        Debug.Log($"Arena: {aiInArena}");
 
+        //AI còn ở camp và chưa tới arena hoặc ko ở camp và chưa tới arena
         if ((aiInBaseCamp && !aiInArena) || (!aiInBaseCamp && !aiInArena))
         {
             RunToArenaPoint();
         }
 
+        //AI đã vào arena
         if(aiInArena)
         {
-            if (!enemyInSightRange && !enemyInAttackRange)
+            resetWalkPointSet-=Time.deltaTime;
+            if (!enemyInSightRange && !enemyInAttackRange)//chưa thấy enemy và chưa vào tầm đánh
             {
+                if (resetWalkPointSet <= 0)//tự động set lại walkpoint sau 20s để tránh tình trạng AI bị kẹt
+                {
+                    resetWalkPointSet = 20f;
+                    walkPointSet = false;
+                }
                 Patroling();
             }
-            if (enemyInSightRange)
+            if (enemyInSightRange)//đã thấy enemy
             {
-                ChaseEnemy();
+                if(this.gameObject.CompareTag("Viking")//riêng tộc tungus sẽ ko chase vì sẽ đứng bắn từ xa
+                || this.gameObject.CompareTag("Asian") 
+                || this.gameObject.CompareTag("Orc") 
+                || this.gameObject.CompareTag("Titan"))
+                {
+                    ChaseEnemy();
+                }
             }
             attackSpeed -= Time.deltaTime;
-            if (enemyInSightRange && enemyInAttackRange)
+            if (enemyInSightRange && enemyInAttackRange)//đã thấy enemy và đã vào tầm đánh
             {
-                if (attackSpeed <= 0)
+                if (this.gameObject.CompareTag("Viking")//các tộc cận chiến sẽ đứng yên đánh nhau
+                || this.gameObject.CompareTag("Asian")
+                || this.gameObject.CompareTag("Orc")
+                || this.gameObject.CompareTag("Titan"))
                 {
-                    attackSpeed = waitToNextAttack;
-                    AttackEnemy();
+                    if (attackSpeed <= 0)
+                    {
+                        attackSpeed = waitToNextAttack;
+                        AttackEnemy();
+                    }
+                }
+                if (this.gameObject.CompareTag("Tungus"))//tộc tungus sẽ hit and run
+                {
+                    if (resetWalkPointSet <= 0)//tự động set lại walkpoint sau 20s để tránh tình trạng AI bị kẹt
+                    {
+                        resetWalkPointSet = 20f;
+                        walkPointSet = false;
+                    }
+                    Patroling();
+                    if (attackSpeed <= 0)
+                    {
+                        attackSpeed = waitToNextAttack;
+                        AttackEnemy();
+                    }
                 }
             }
             skillSpeed -= Time.deltaTime;
-            if (enemyInSightRange && enemyInSkillRange)
+            if (enemyInSightRange && enemyInSkillRange)//đã thấy enemy và đã vào tầm skill
             {
                 if (skillSpeed <= 0)
                 {
-                    if (chieftainType != ChieftainType.UNKNOWN)
-                    {
                         skillSpeed = waitToNextSkill;
                         SkillEnemy();
-                    }
                 }
             }
         }
@@ -139,8 +171,6 @@ public class EnemyAI : MonoBehaviour
     {
         float randomX= Random.Range(-arenaZone+20f, arenaZone-20f);//+- bớt 20 đơn vị để đảm bảo walkpoint nằm trong arenazone
         float randomZ= Random.Range(-arenaZone+20f,arenaZone-20f);
-        Debug.Log($"RandomX: {randomX}");
-        Debug.Log($"RandomZ: {randomZ}");
 
         walkPoint =new Vector3(arena.position.x+ randomX, arena.position.y, arena.position.z+ randomZ);
 
@@ -175,55 +205,70 @@ public class EnemyAI : MonoBehaviour
     }
     private void AttackEnemy()
     {
-        //if (this.GetComponent<NavMeshAgent>().enabled == true)
-        //{
-        //    agent.SetDestination(transform.position);//đảm bảo AI ko di chuyển
-        //}
-
-        if (ListenerManager.HasInstance)
-        {
-            ListenerManager.Instance.BroadCast(ListenType.PLAYER_HIT, aiAnim);
-        }
         Collider[] hitEnemy = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
         foreach (Collider enemy in hitEnemy)
         {
-                if (this.gameObject.CompareTag("Asian"))
+            transform.LookAt(enemy.transform.position);//nhìn đúng hướng rồi mới đánh
+            if (this.gameObject.CompareTag("Asian"))
+            {
+                if (ListenerManager.HasInstance)
                 {
-                    enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
-                    getHitEffect = Instantiate(getHitByPunchEffect, enemy.transform);
-                    Destroy(getHitEffect, 2f);
+                    ListenerManager.Instance.BroadCast(ListenType.PLAYER_HIT, aiAnim);
                 }
-                if (this.gameObject.CompareTag("Viking"))
+                enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
+                getHitEffect = Instantiate(getHitByPunchEffect, enemy.transform);
+                Destroy(getHitEffect, 2f);
+            }
+            if (this.gameObject.CompareTag("Viking"))
+            {
+                if (ListenerManager.HasInstance)
                 {
-                    enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
-                    getHitEffect = Instantiate(getHitByWeaponEffect, enemy.transform);
-                    Destroy(getHitEffect, 2f);
+                    ListenerManager.Instance.BroadCast(ListenType.PLAYER_HIT, aiAnim);
                 }
-                if (this.gameObject.CompareTag("Orc"))
+                enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
+                getHitEffect = Instantiate(getHitByWeaponEffect, enemy.transform);
+                Destroy(getHitEffect, 2f);
+            }
+            if (this.gameObject.CompareTag("Orc"))
+            {
+                if (ListenerManager.HasInstance)
                 {
-                    enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
-                    getHitEffect = Instantiate(getHitByWeaponEffect, enemy.transform);
-                    Destroy(getHitEffect, 2f);
+                    ListenerManager.Instance.BroadCast(ListenType.PLAYER_HIT, aiAnim);
                 }
-                if (this.gameObject.CompareTag("Titan"))
+                enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
+                getHitEffect = Instantiate(getHitByWeaponEffect, enemy.transform);
+                Destroy(getHitEffect, 2f);
+            }
+            if (this.gameObject.CompareTag("Titan"))
+            {
+                if (ListenerManager.HasInstance)
                 {
-                    enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
-                    getHitEffect = Instantiate(getHitByPunchEffect, enemy.transform);
-                    Destroy(getHitEffect, 2f);
+                    ListenerManager.Instance.BroadCast(ListenType.PLAYER_HIT, aiAnim);
                 }
+                enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
+                getHitEffect = Instantiate(getHitByPunchEffect, enemy.transform);
+                Destroy(getHitEffect, 2f);
+            }
         }
         if (this.gameObject.CompareTag("Tungus"))
         {
-            Instantiate(arrowPrefab, shootPoint.position, shootPoint.rotation).SetMoveDirection(shootPoint.forward);
+            bool tungusHitEnemy = Physics.Raycast(shootPoint.position, shootPoint.forward, attackRange, enemyLayer);
+            if (tungusHitEnemy)
+            {
+                if (ListenerManager.HasInstance)
+                {
+                    ListenerManager.Instance.BroadCast(ListenType.PLAYER_HIT, aiAnim);
+                }
+                Instantiate(arrowPrefab, shootPoint.position, shootPoint.rotation).SetMoveDirection(shootPoint.forward);
+            }
+        }
+        if (this.gameObject.CompareTag("Titan"))
+        {
+            ListenerManager.Instance.BroadCast(ListenType.TITAN_ATTACK_EFFECT, this.gameObject);
         }
     }
     private void SkillEnemy()
     {
-        //if (this.GetComponent<NavMeshAgent>().enabled == true)
-        //{
-        //    agent.SetDestination(transform.position);//đảm bảo AI ko di chuyển
-        //}
-
         if (chieftainType != ChieftainType.UNKNOWN)
         {
             if (ListenerManager.HasInstance)
@@ -259,6 +304,10 @@ public class EnemyAI : MonoBehaviour
                     }
                 }
             }
+            if (chieftainType == ChieftainType.ASIAN)
+            {
+                ListenerManager.Instance.BroadCast(ListenType.SKILL_ASIAN_CHIEFTAIN_AI_EFFECT, this.gameObject);
+            }
             if (chieftainType == ChieftainType.VIKING)
             {
                 ListenerManager.Instance.BroadCast(ListenType.SKILL_VIKING_CHIEFTAIN_EFFECT, this.gameObject);
@@ -270,6 +319,10 @@ public class EnemyAI : MonoBehaviour
             if (chieftainType == ChieftainType.TUNGUS)
             {
                 ListenerManager.Instance.BroadCast(ListenType.SKILL_TUNGUS_CHIEFTAIN_EFFECT, this.gameObject);
+            }
+            if (chieftainType == ChieftainType.TITAN_ASIAN)
+            {
+                ListenerManager.Instance.BroadCast(ListenType.SKILL_TITAN_ASIAN_EFFECT, this.gameObject);
             }
             if (chieftainType == ChieftainType.TITAN_ORC)
             {
@@ -293,6 +346,14 @@ public class EnemyAI : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
+        if (attackPoint != null)
+        {
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        }
+        if (skillPoint != null)
+        {
+            Gizmos.DrawWireSphere(skillPoint.position, skillRange);
+        }
         if (baseCamp != null)
         {
             Gizmos.DrawWireSphere(baseCamp.position, baseCampZone);

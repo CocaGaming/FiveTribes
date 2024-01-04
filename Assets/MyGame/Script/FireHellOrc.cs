@@ -19,12 +19,12 @@ public class FireHellOrc : MonoBehaviour
         {
             for (int i = 0; ; i++)
             {
-                enemy.GetComponentInParent<HealthManager>().GetHitBySkill(skillOrcDamage);//mất máu theo thời gian
-                yield return new WaitForSeconds(delayOrcSkillDamage);
-                if (enemy.GetComponentInParent<HealthManager>().currentHealth <= 0)
-                {
-                    break;
-                }
+                    enemy.GetComponentInParent<HealthManager>().GetHitBySkill(skillOrcDamage);//mất máu theo thời gian
+                    yield return new WaitForSeconds(delayOrcSkillDamage);
+                    if (enemy.GetComponentInParent<HealthManager>().currentHealth <= 0)
+                    {
+                        break;
+                    }
             }
         }
     }

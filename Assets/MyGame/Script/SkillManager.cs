@@ -11,6 +11,9 @@ public class SkillManager : MonoBehaviour
     public float skillOrcEffectTime;
     public float skillTungusEffectTime;
 
+    public GameObject titanAttackEffect;
+    public GameObject kickEffect;
+    public GameObject titanKickEffect;
     public GameObject roarEffect;
     public GameObject roarTitanEffect;
     public GameObject fireHellEffect;
@@ -20,6 +23,7 @@ public class SkillManager : MonoBehaviour
     public GameObject getHitByKickEffect;
     private GameObject getHitEffect;
     private GameObject skillEffect;
+    private GameObject attackEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -27,14 +31,18 @@ public class SkillManager : MonoBehaviour
         if (ListenerManager.HasInstance)
         {
             ListenerManager.Instance.Register(ListenType.SKILL_ASIAN_ENEMY_EFFECT,OnSkillAsianEnemyEffect);
+            ListenerManager.Instance.Register(ListenType.SKILL_ASIAN_CHIEFTAIN_EFFECT, OnSkillAsianChieftainEffect);
+            ListenerManager.Instance.Register(ListenType.SKILL_ASIAN_CHIEFTAIN_AI_EFFECT, OnSkillAsianChieftainAIEffect);
             ListenerManager.Instance.Register(ListenType.SKILL_VIKING_ENEMY_EFFECT, OnSkillVikingEnemyEffect);
             ListenerManager.Instance.Register(ListenType.SKILL_VIKING_CHIEFTAIN_EFFECT, OnSkillVikingChieftainEffect);
             ListenerManager.Instance.Register(ListenType.SKILL_ORC_CHIEFTAIN_EFFECT, OnSkillOrcChieftainEffect);
             ListenerManager.Instance.Register(ListenType.SKILL_TUNGUS_CHIEFTAIN_EFFECT, OnSkillTungusChieftainEffect);
             ListenerManager.Instance.Register(ListenType.SKILL_TUNGUS_ALLY_EFFECT, OnSkillTungusAllyEffect);
+            ListenerManager.Instance.Register(ListenType.SKILL_TITAN_ASIAN_EFFECT, OnSkillTitanAsianEffect);
             ListenerManager.Instance.Register(ListenType.SKILL_TITAN_ORC_EFFECT, OnSkillTitanOrcEffect);
             ListenerManager.Instance.Register(ListenType.SKILL_TITAN_TUNGUS_EFFECT, OnSkillTitanTungusEffect);
             ListenerManager.Instance.Register(ListenType.SKILL_TITAN_VIKING_EFFECT, OnSkillTitanVikingEffect);
+            ListenerManager.Instance.Register(ListenType.TITAN_ATTACK_EFFECT, OnTitanAttackEffect);
         }
     }
     private void OnDestroy()
@@ -42,14 +50,29 @@ public class SkillManager : MonoBehaviour
         if (ListenerManager.HasInstance)
         {
             ListenerManager.Instance.Unregister(ListenType.SKILL_ASIAN_ENEMY_EFFECT, OnSkillAsianEnemyEffect);
+            ListenerManager.Instance.Unregister(ListenType.SKILL_ASIAN_CHIEFTAIN_EFFECT, OnSkillAsianChieftainEffect);
+            ListenerManager.Instance.Unregister(ListenType.SKILL_ASIAN_CHIEFTAIN_AI_EFFECT, OnSkillAsianChieftainAIEffect);
             ListenerManager.Instance.Unregister(ListenType.SKILL_VIKING_ENEMY_EFFECT, OnSkillVikingEnemyEffect);
             ListenerManager.Instance.Unregister(ListenType.SKILL_VIKING_CHIEFTAIN_EFFECT, OnSkillVikingChieftainEffect);
             ListenerManager.Instance.Unregister(ListenType.SKILL_ORC_CHIEFTAIN_EFFECT, OnSkillOrcChieftainEffect);
             ListenerManager.Instance.Unregister(ListenType.SKILL_TUNGUS_CHIEFTAIN_EFFECT, OnSkillTungusChieftainEffect);
             ListenerManager.Instance.Unregister(ListenType.SKILL_TUNGUS_ALLY_EFFECT, OnSkillTungusAllyEffect);
+            ListenerManager.Instance.Unregister(ListenType.SKILL_TITAN_ASIAN_EFFECT, OnSkillTitanAsianEffect);
             ListenerManager.Instance.Unregister(ListenType.SKILL_TITAN_ORC_EFFECT, OnSkillTitanOrcEffect);
             ListenerManager.Instance.Unregister(ListenType.SKILL_TITAN_TUNGUS_EFFECT, OnSkillTitanTungusEffect);
             ListenerManager.Instance.Unregister(ListenType.SKILL_TITAN_VIKING_EFFECT, OnSkillTitanVikingEffect);
+            ListenerManager.Instance.Unregister(ListenType.TITAN_ATTACK_EFFECT, OnTitanAttackEffect);
+        }
+    }
+    private void OnTitanAttackEffect(object value)
+    {
+        if (value != null)
+        {
+            if(value is GameObject titan)
+            {
+                attackEffect = Instantiate(titanAttackEffect, titan.transform);
+                Destroy(attackEffect, 2f);
+            }
         }
     }
     private void OnSkillAsianEnemyEffect(object value)
@@ -58,9 +81,45 @@ public class SkillManager : MonoBehaviour
         {
             if(value is Collider enemy)
             {
-                enemy.GetComponentInParent<HealthManager>().GetHitBySkill(skillAsianDamage);
-                getHitEffect = Instantiate(getHitByKickEffect, enemy.transform);
-                Destroy(getHitEffect, 2f);
+                if (enemy.GetComponentInParent<HealthManager>().isInvincible == false)
+                {
+                    enemy.GetComponentInParent<HealthManager>().GetHitBySkill(skillAsianDamage);
+                    getHitEffect = Instantiate(getHitByKickEffect, enemy.transform);
+                    Destroy(getHitEffect, 2f);
+                }
+            }
+        }
+    }
+    private void OnSkillAsianChieftainEffect(object value)
+    {
+        if(value != null)
+        {
+            if(value is GameObject asianChieftain)
+            {
+                skillEffect = Instantiate(kickEffect, asianChieftain.GetComponent<PlayerInputManager>().skillPoint);
+                Destroy(skillEffect,3f);
+            }
+        }
+    }
+    private void OnSkillAsianChieftainAIEffect(object value)//do AI ko có component Input nên phải tạo riêng sự kiện khác để get skillpoint từ enemyAI
+    {
+        if (value != null)
+        {
+            if (value is GameObject asianChieftain)
+            {
+                skillEffect = Instantiate(kickEffect, asianChieftain.GetComponent<EnemyAI>().skillPoint);
+                Destroy(skillEffect, 3f);
+            }
+        }
+    }
+    private void OnSkillTitanAsianEffect(object value)
+    {
+        if (value != null)
+        {
+            if(value is GameObject titanAsian)
+            {
+                skillEffect = Instantiate(titanKickEffect, titanAsian.GetComponent<EnemyAI>().skillPoint);
+                Destroy(skillEffect, 3f);
             }
         }
     }
@@ -70,22 +129,25 @@ public class SkillManager : MonoBehaviour
         {
             if(value is Collider enemy)
             {
-                if (ListenerManager.HasInstance)
+                if (enemy.GetComponentInParent<HealthManager>().isInvincible == false)
                 {
-                    Animator enemyAnim = enemy.GetComponentInParent<Animator>();
-                    ListenerManager.Instance.BroadCast(ListenType.PLAYER_IDLE, enemyAnim);
+                    if (ListenerManager.HasInstance)
+                    {
+                        Animator enemyAnim = enemy.GetComponentInParent<Animator>();
+                        ListenerManager.Instance.BroadCast(ListenType.PLAYER_IDLE, enemyAnim);
+                    }
+                    enemy.GetComponentInParent<CharacterController>().enabled = false;
+                    enemy.GetComponentInParent<NavMeshAgent>().enabled = false;
+                    enemy.GetComponentInParent<EnemyAI>().enabled = false;
+                    StartCoroutine(SetDefaultSkillViking(enemy));
                 }
-                enemy.GetComponentInParent<CharacterController>().enabled = false;
-                enemy.GetComponentInParent<NavMeshAgent>().enabled = false;
-                enemy.GetComponentInParent<EnemyAI>().enabled = false;
-                StartCoroutine(SetDefaultSkillViking(enemy));
             }
         }
     }
     private IEnumerator SetDefaultSkillViking(Collider enemy)
     {
         yield return new WaitForSeconds(skillVikingEffectTime);
-        if (enemy != null)
+        if (enemy != null && enemy.GetComponentInParent<HealthManager>().currentHealth>0)//nếu còn sống thì mới bật lại
         {
             enemy.GetComponentInParent<CharacterController>().enabled = true;
             enemy.GetComponentInParent<NavMeshAgent>().enabled = true;
@@ -107,9 +169,9 @@ public class SkillManager : MonoBehaviour
     {
         if (value != null)
         {
-            if (value is GameObject vikingChieftain)
+            if (value is GameObject titanViking)
             {
-                skillEffect = Instantiate(roarTitanEffect, vikingChieftain.transform);
+                skillEffect = Instantiate(roarTitanEffect, titanViking.transform);
                 Destroy(skillEffect, skillVikingEffectTime);
             }
         }

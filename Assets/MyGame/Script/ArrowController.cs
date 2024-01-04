@@ -26,7 +26,7 @@ public class ArrowController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Orc")|| other.CompareTag("Asian")|| other.CompareTag("Viking"))
+        if(other.CompareTag("OrcArrow")|| other.CompareTag("AsianArrow")|| other.CompareTag("VikingArrow")|| other.CompareTag("TitanArrow"))
         {
             other.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, other.GetComponentInParent<PlayerAttributes>().defencePoint);
             getHitEffect = Instantiate(getHitByWeaponEffect, other.transform);

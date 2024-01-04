@@ -157,6 +157,10 @@ public class PlayerInputManager : MonoBehaviour
                 {
                     Instantiate(arrowPrefab, shootPoint.position, shootPoint.rotation).SetMoveDirection(shootPoint.forward);
                 }
+                if (this.gameObject.CompareTag("Titan"))
+                {
+                    ListenerManager.Instance.BroadCast(ListenType.TITAN_ATTACK_EFFECT, this.gameObject);
+                }
             }
         }
         skillSpeed -= Time.deltaTime;
@@ -198,6 +202,10 @@ public class PlayerInputManager : MonoBehaviour
                         }
                     }
                 }
+                if (chieftainType == ChieftainType.ASIAN)
+                {
+                    ListenerManager.Instance.BroadCast(ListenType.SKILL_ASIAN_CHIEFTAIN_EFFECT, this.gameObject);
+                }
                 if (chieftainType == ChieftainType.VIKING)
                 {
                     ListenerManager.Instance.BroadCast(ListenType.SKILL_VIKING_CHIEFTAIN_EFFECT, this.gameObject);
@@ -209,6 +217,10 @@ public class PlayerInputManager : MonoBehaviour
                 if (chieftainType == ChieftainType.TUNGUS)
                 {
                     ListenerManager.Instance.BroadCast(ListenType.SKILL_TUNGUS_CHIEFTAIN_EFFECT, this.gameObject);
+                }
+                if (chieftainType == ChieftainType.TITAN_ASIAN)
+                {
+                    ListenerManager.Instance.BroadCast(ListenType.SKILL_TITAN_ASIAN_EFFECT, this.gameObject);
                 }
                 if (chieftainType == ChieftainType.TITAN_ORC)
                 {
