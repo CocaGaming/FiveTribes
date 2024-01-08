@@ -52,3 +52,12 @@ public enum TribeType
     TUNGUS,
     TITAN
 }
+
+public enum UIType
+{
+    UNKNOWN,
+    SCREEN,
+    POPUP,
+    NOTIFY,
+    OVERLAP
+}

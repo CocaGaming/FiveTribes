@@ -16,6 +16,8 @@ public class PlayerInputManager : MonoBehaviour
     private float waitToNextAttack;
     [SerializeField]
     private float waitToNextSkill;
+    [SerializeField]
+    private Transform cameraTransform;
 
     private float horizontalInput;
     private float verticalInput;
@@ -69,13 +71,17 @@ public class PlayerInputManager : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+
         Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
         float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
         playerAnim.SetFloat("Input Magnitude", inputMagnitude, 0.05f, Time.deltaTime);
-        movementDirection.Normalize();
 
         print($"Vector Magnitude after normalize: {movementDirection.magnitude}");
+        movementDirection = Quaternion.AngleAxis(cameraTransform.rotation.eulerAngles.y, Vector3.up) * movementDirection;
+        movementDirection.Normalize();
+
         yForce += Physics.gravity.y * Time.deltaTime;
+
         if (movementDirection != Vector3.zero)
         {
             if (ListenerManager.HasInstance)
@@ -251,6 +257,18 @@ public class PlayerInputManager : MonoBehaviour
                 velocity.y = yForce * Time.deltaTime;
                 characterController.Move(velocity);
             }
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            Cursor.lockState = CursorLockMode.Locked;//ẩn và lock chuột tại ví trí trung tâm của scene
+        }
+        else
+        {
+            Cursor.lockState= CursorLockMode.None;
+        }
     }
     private void OnDrawGizmosSelected()
     {
