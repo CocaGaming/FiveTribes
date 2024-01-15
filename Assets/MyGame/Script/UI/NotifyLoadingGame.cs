@@ -48,6 +48,7 @@ public class NotifyLoadingGame : BaseNotify
                 this.Hide();
             }
             yield return null;//để thoát ra khỏi vòng while
+            
         }
     }
 }

@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttributes : BaseManager<PlayerAttributes>
+public class PlayerAttributes : MonoBehaviour
 {
     public int healthPoint;
     public int staminaPoint;
     public int attackPoint;
     public int defencePoint;
     public TribeType tribeType;
+
     private void Awake()
     {
-        if(tribeType==TribeType.ASIAN)
+        if (tribeType == TribeType.ASIAN)
         {
             healthPoint = DataManager.Instance.playerDataAsian.playerData.healthPoint;
             staminaPoint = DataManager.Instance.playerDataAsian.playerData.staminaPoint;
-            attackPoint=DataManager.Instance.playerDataAsian.playerData.attackPoint;
-            defencePoint=DataManager.Instance.playerDataAsian.playerData.defencePoint;
+            attackPoint = DataManager.Instance.playerDataAsian.playerData.attackPoint;
+            defencePoint = DataManager.Instance.playerDataAsian.playerData.defencePoint;
         }
         if (tribeType == TribeType.TUNGUS)
         {

@@ -16,8 +16,7 @@ public class PlayerInputManager : MonoBehaviour
     private float waitToNextAttack;
     [SerializeField]
     private float waitToNextSkill;
-    [SerializeField]
-    private Transform cameraTransform;
+    public Transform cameraTransform;
 
     private float horizontalInput;
     private float verticalInput;
