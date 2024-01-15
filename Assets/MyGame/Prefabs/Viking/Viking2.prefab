@@ -499,7 +499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2627647659923643673
 Transform:
   m_ObjectHideFlags: 0
@@ -519,6 +519,8 @@ Transform:
   - {fileID: 1695868178085896537}
   - {fileID: 4524837855291610227}
   - {fileID: 8744332731011201097}
+  - {fileID: 3772179946344034701}
+  - {fileID: 836924646584578799}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3563681244177414054
@@ -533,7 +535,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 7c98f06fd667111499d11091d412dc39, type: 3}
   m_Controller: {fileID: 22100000, guid: e741ad1cd31ec32499ef36dea9d34799, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -565,7 +567,7 @@ CharacterController:
   m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!114 &3574964762733512080
@@ -636,7 +638,7 @@ MonoBehaviour:
   waitToNextAttack: 2
   waitToNextSkill: 7
   cameraTransform: {fileID: 0}
-  attackPoint: {fileID: 0}
+  attackPoint: {fileID: 3772179946344034701}
   attackRange: 0.7
   attackSpeed: 0
   skillPoint: {fileID: 0}
@@ -825,7 +827,7 @@ GameObject:
   - component: {fileID: 3586709899643328789}
   m_Layer: 7
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Viking
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1582,7 +1584,7 @@ GameObject:
   - component: {fileID: 7605670742836030299}
   m_Layer: 0
   m_Name: HitByArrow
-  m_TagString: Untagged
+  m_TagString: VikingArrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1753,6 +1755,37 @@ Transform:
   - {fileID: 4424378713546545567}
   m_Father: {fileID: 7794323866846758277}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7618585361956939122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3772179946344034701}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3772179946344034701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7618585361956939122}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.027, y: 0.882, z: 1.031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2627647659923643673}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7666351146097487744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,6 +1817,37 @@ Transform:
   m_Children:
   - {fileID: 5950373700190122934}
   m_Father: {fileID: 7413255467721351244}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7770869015779768136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 836924646584578799}
+  m_Layer: 0
+  m_Name: CameraFocus (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &836924646584578799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7770869015779768136}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2627647659923643673}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7808332553762080690
 GameObject:

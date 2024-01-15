@@ -472,7 +472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3182476555925741706
 Transform:
   m_ObjectHideFlags: 0
@@ -490,6 +490,8 @@ Transform:
   - {fileID: 4681814619118665026}
   - {fileID: 2696542682819755437}
   - {fileID: 1975320553337945581}
+  - {fileID: 6088589187829331440}
+  - {fileID: 6934423456050977510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8847956179990330096
@@ -504,7 +506,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: db37a7cdc61d0a449a1d72b80c91221c, type: 3}
   m_Controller: {fileID: 22100000, guid: baaca7b377eb7ba45aeba0df8c2dbbe6, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -552,7 +554,7 @@ CharacterController:
   m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!114 &9112762849612538054
@@ -606,7 +608,8 @@ MonoBehaviour:
   runSpeed: 0.7
   waitToNextAttack: 1
   waitToNextSkill: 7
-  attackPoint: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  attackPoint: {fileID: 6934423456050977510}
   attackRange: 0.7
   attackSpeed: 0
   skillPoint: {fileID: 0}
@@ -620,7 +623,7 @@ MonoBehaviour:
     m_Bits: 512
   chieftainType: 4
   arrowPrefab: {fileID: 8121038578002054464, guid: ebde48dc44888f04b8b5c42f99c4a731, type: 3}
-  shootPoint: {fileID: 0}
+  shootPoint: {fileID: 6088589187829331440}
   maxStamina: 0
   currentStamina: 0
   attackDamage: 0
@@ -1338,6 +1341,37 @@ Transform:
   - {fileID: 3483161100547300088}
   m_Father: {fileID: 2429077803632144598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6287913776397395114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6934423456050977510}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6934423456050977510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6287913776397395114}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.027, y: 0.882, z: 1.031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3182476555925741706}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6421373689160951572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,7 +1827,7 @@ GameObject:
   - component: {fileID: 3081142648285919733}
   m_Layer: 9
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Tungus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1867,6 +1901,37 @@ Transform:
   m_Children:
   - {fileID: 3772475832314287808}
   m_Father: {fileID: 8200572153163023692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8688739191674260780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6088589187829331440}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6088589187829331440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8688739191674260780}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 1.012}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3182476555925741706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8885231916366644536
 GameObject:

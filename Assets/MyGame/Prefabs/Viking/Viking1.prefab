@@ -629,6 +629,37 @@ Transform:
   - {fileID: 5733827084484330345}
   m_Father: {fileID: 3166668959136859601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3483370831920239291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2776114314838423817}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2776114314838423817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483370831920239291}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.027, y: 0.882, z: 1.031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2578802194567322235}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4002571868835627128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,6 +1111,37 @@ Transform:
   - {fileID: 3202445404201862850}
   m_Father: {fileID: 5156695916808273506}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6520523773275629328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8183269828080399534}
+  m_Layer: 0
+  m_Name: CameraFocus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8183269828080399534
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6520523773275629328}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2578802194567322235}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6532774667243891134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,6 +1248,8 @@ Transform:
   - {fileID: 9201250203878441891}
   - {fileID: 5234367060402720023}
   - {fileID: 1753581157837772457}
+  - {fileID: 2776114314838423817}
+  - {fileID: 8183269828080399534}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2704202695948058980
@@ -1200,7 +1264,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 7c98f06fd667111499d11091d412dc39, type: 3}
   m_Controller: {fileID: 22100000, guid: e741ad1cd31ec32499ef36dea9d34799, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -1232,7 +1296,7 @@ CharacterController:
   m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!114 &1342555607770037351
@@ -1303,7 +1367,7 @@ MonoBehaviour:
   waitToNextAttack: 2
   waitToNextSkill: 7
   cameraTransform: {fileID: 0}
-  attackPoint: {fileID: 0}
+  attackPoint: {fileID: 2776114314838423817}
   attackRange: 0.7
   attackSpeed: 0
   skillPoint: {fileID: 0}
@@ -1315,7 +1379,7 @@ MonoBehaviour:
   allyLayer:
     serializedVersion: 2
     m_Bits: 0
-  chieftainType: 2
+  chieftainType: 0
   arrowPrefab: {fileID: 0}
   shootPoint: {fileID: 0}
   maxStamina: 0
@@ -1827,7 +1891,7 @@ GameObject:
   - component: {fileID: 284237700689498182}
   m_Layer: 0
   m_Name: HitByArrow
-  m_TagString: Untagged
+  m_TagString: VikingArrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1914,7 +1978,7 @@ GameObject:
   - component: {fileID: 5817469875351720193}
   m_Layer: 7
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Viking
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

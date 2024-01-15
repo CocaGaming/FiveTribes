@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 2614655269308023933}
   m_Layer: 0
   m_Name: HitByArrow
-  m_TagString: Untagged
+  m_TagString: VikingArrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -828,7 +828,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 7c98f06fd667111499d11091d412dc39, type: 3}
   m_Controller: {fileID: 22100000, guid: e741ad1cd31ec32499ef36dea9d34799, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -860,7 +860,7 @@ CharacterController:
   m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!114 &6238517838010754376
@@ -963,7 +963,7 @@ GameObject:
   - component: {fileID: 1306196098584468605}
   m_Layer: 7
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Viking
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

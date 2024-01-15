@@ -124,7 +124,7 @@ public class PlayerInputManager : MonoBehaviour
         attackSpeed-=Time.deltaTime;
         if (attackSpeed <=0 )
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.C))
             {
                 attackSpeed = waitToNextAttack;
                 if (ListenerManager.HasInstance)
@@ -136,6 +136,7 @@ public class PlayerInputManager : MonoBehaviour
                 {
                     if (this.gameObject.CompareTag("Asian"))
                     {
+                        //thêm đk if this.gameObject.isPlayer==true && enemy.GetComponentInParent<HealthManager>().currentHealth<=0 thì diễn ra sự kiện cộng tiền cho player
                         enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage,enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
                         getHitEffect = Instantiate(getHitByPunchEffect, enemy.transform);
                         Destroy(getHitEffect, 2f);

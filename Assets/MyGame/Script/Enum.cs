@@ -28,6 +28,8 @@ public enum ListenType
     SKILL_TITAN_TUNGUS_ALLY_EFFECT,
     SKILL_TITAN_VIKING_EFFECT,
     SKILL_TITAN_VIKING_ENEMY_EFFECT,
+    TUNGUS_CHIEFTAIN_SELECTED,
+    TUNGUS_VILLAGER_SELECTEC,
 }
 
 public enum ChieftainType
@@ -52,7 +54,12 @@ public enum TribeType
     TUNGUS,
     TITAN
 }
-
+public enum RoleType
+{
+    UNKNOWN=0,
+    CHIEFTAIN,
+    VILLAGER
+}
 public enum UIType
 {
     UNKNOWN,
@@ -61,3 +68,4 @@ public enum UIType
     NOTIFY,
     OVERLAP
 }
+

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/FiveTribes.unity
+    path: Assets/MyGame/Scenes/Loading.unity
+    guid: 57eebf2247e59e74d8f702a60ae89a1f
+  - enabled: 1
+    path: Assets/MyGame/Scenes/FiveTribes.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

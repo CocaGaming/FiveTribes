@@ -20,6 +20,7 @@ TagManager:
   - AsianArrow
   - OrcArrow
   - TitanArrow
+  - Preview
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - HealBuffSkill
   - Terrain
   - BaseGround
-  - 
+  - Model
   - 
   - 
   - 
