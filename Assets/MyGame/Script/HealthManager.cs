@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class HealthManager : MonoBehaviour
     public int currentHealth;
     public Animator playerAnim;
     public bool isInvincible;
+
     // Start is called before the first frame update
     void Start()
     {

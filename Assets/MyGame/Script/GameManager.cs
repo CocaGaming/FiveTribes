@@ -8,6 +8,7 @@ public class GameManager : BaseManager<GameManager>
     public TribeType tribeType;
     public RoleType roleType;
     private GameObject characterSelected;
+    public float hour;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,13 @@ public class GameManager : BaseManager<GameManager>
             {
                 UIManager.Instance.ShowScreen<ScreenHome>();
             }
+        }
+    }
+    private void Update()
+    {
+        if (ScreenGame.Instance != null)
+        {
+            hour = ScreenGame.Instance.hour;
         }
     }
 }

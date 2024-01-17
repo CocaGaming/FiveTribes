@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tribeType: 0
   roleType: 0
+  hour: 0
 --- !u!4 &1139225009
 Transform:
   m_ObjectHideFlags: 0

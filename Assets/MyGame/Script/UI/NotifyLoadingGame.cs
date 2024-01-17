@@ -50,5 +50,9 @@ public class NotifyLoadingGame : BaseNotify
             yield return null;//để thoát ra khỏi vòng while
             
         }
+        if (CharacterSelect.HasInstance)
+        {
+            CharacterSelect.Instance.SetCharacter();
+        }
     }
 }

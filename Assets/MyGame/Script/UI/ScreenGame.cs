@@ -2,11 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScreenGame : BaseScreen
 {
-    public float timeLeft;
+    public static ScreenGame Instance;
+    public float intervalTime;
+    private float interval;
+    public float hour;
+    public float minute;
     public TextMeshProUGUI time;
+
+    private void Start()
+    {
+        Instance = this;
+        interval = intervalTime;
+        hour = 0f;
+        minute = 0f;
+        time.text = hour.ToString("00") + ":" + minute.ToString("00");
+    }
     public override void Init()
     {
         base.Init();
@@ -21,21 +35,28 @@ public class ScreenGame : BaseScreen
     }
     private void Update()
     {
-        if (timeLeft > 0)
+        interval -= Time.deltaTime;
+        if (interval <= 0)
         {
-            timeLeft -= Time.deltaTime;
-            UpdateTimer(timeLeft);
-        }
-        else
-        {
-            timeLeft = 0;
+            minute += 12f;
+            interval = intervalTime;
+            UpdateTimer(hour, minute);
+            if (minute == 60)
+            {
+                hour++;
+                minute = 0;
+                UpdateTimer(hour, minute);
+            }
+            if (hour == 24)
+            {
+                hour = 0;
+                minute = 0;
+                UpdateTimer(hour, minute);
+            }
         }
     }
-    private void UpdateTimer(float currentTime)
+    private void UpdateTimer(float hour, float minute)
     {
-        currentTime += 1;
-        float minutes=Mathf.FloorToInt(currentTime/60);
-        float seconds=Mathf.FloorToInt(currentTime%60);
-        time.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        time.text = hour.ToString("00") + ":" + minute.ToString("00");
     }
 }

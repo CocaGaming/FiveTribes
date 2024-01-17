@@ -25,8 +25,14 @@ public class CharacterSelect : BaseManager<CharacterSelect>
     public GameObject aiVikingVillager;
     public CinemachineFreeLook freelookCamera;
 
+    public float stamina;
+    public float maxHealth;
+    public float currentHealth;
+    public int attack;
+    public int defence;
 
-private void Update()
+
+public void SetCharacter()
 {
     if (GameManager.HasInstance)
     {

@@ -77,15 +77,17 @@ public class EnemyAI : MonoBehaviour
         aiInArena = Physics.CheckSphere(arena.position, arenaZone,allyLayer);
 
         //AI còn ở camp và chưa tới arena hoặc ko ở camp và chưa tới arena
-        if ((aiInBaseCamp && !aiInArena) || (!aiInBaseCamp && !aiInArena))
+        if (aiInBaseCamp/* && !aiInArena) || (!aiInBaseCamp && !aiInArena)*/)//đúng giờ mới chạy ra arena
         {
-            RunToArenaPoint();
+            if(GameManager.Instance.hour == 1f)
+            {
+                RunToArenaPoint();
+            }
         }
-
         //AI đã vào arena
-        if(aiInArena)
+        if (aiInArena)
         {
-            resetWalkPointSet-=Time.deltaTime;
+            resetWalkPointSet -=Time.deltaTime;
             if (!enemyInSightRange && !enemyInAttackRange)//chưa thấy enemy và chưa vào tầm đánh
             {
                 if (resetWalkPointSet <= 0)//tự động set lại walkpoint sau 20s để tránh tình trạng AI bị kẹt
@@ -186,6 +188,14 @@ public class EnemyAI : MonoBehaviour
             ListenerManager.Instance.BroadCast(ListenType.PLAYER_FAST_RUN, aiAnim);
         }
         agent.SetDestination(arena.position);
+    }
+    private void RunToBaseCamp()
+    {
+        if (ListenerManager.HasInstance)
+        {
+            ListenerManager.Instance.BroadCast(ListenType.PLAYER_FAST_RUN, aiAnim);
+        }
+        agent.SetDestination(baseCamp.position);
     }
     private void ChaseEnemy()
     {
