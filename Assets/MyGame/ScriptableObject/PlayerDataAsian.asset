@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData:
     healthPoint: 20
-    staminaPoint: 5
-    attackPoint: 5
-    defencePoint: 5
+    staminaPoint: 6
+    attackPoint: 6
+    defencePoint: 6

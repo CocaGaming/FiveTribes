@@ -17,7 +17,7 @@ public class ScreenGame : BaseScreen
     {
         Instance = this;
         interval = intervalTime;
-        hour = 0f;
+        hour = 6f;
         minute = 0f;
         time.text = hour.ToString("00") + ":" + minute.ToString("00");
     }

@@ -37,6 +37,6 @@ Material:
     - __dirty: 0
     m_Colors:
     - _ColorBottom: {r: 0.8161765, g: 0.9087222, b: 1, a: 0}
-    - _ColorTop: {r: 0.51086044, g: 0.35148948, b: 0.08077709, a: 1}
+    - _ColorTop: {r: 0.2207257, g: 0.15186682, b: 0.03490107, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

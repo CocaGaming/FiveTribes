@@ -136,13 +136,24 @@ public class SkillManager : MonoBehaviour
                         Animator enemyAnim = enemy.GetComponentInParent<Animator>();
                         ListenerManager.Instance.BroadCast(ListenType.PLAYER_IDLE, enemyAnim);
                     }
+
                     if(enemy.GetComponentInParent<PlayerInputManager>() != null)
                     {
                         enemy.GetComponentInParent<PlayerInputManager>().enabled = false;
                     }
+
                     enemy.GetComponentInParent<CharacterController>().enabled = false;
-                    enemy.GetComponentInParent<NavMeshAgent>().enabled = false;
-                    enemy.GetComponentInParent<EnemyAI>().enabled = false;
+
+                    if (enemy.GetComponentInParent<NavMeshAgent>() != null)
+                    {
+                        enemy.GetComponentInParent<NavMeshAgent>().enabled = false;
+                    }
+
+                    if (enemy.GetComponentInParent<EnemyAI>() != null)
+                    {
+                        enemy.GetComponentInParent<EnemyAI>().enabled = false;
+                    }
+                   
                     StartCoroutine(SetDefaultSkillViking(enemy));
                 }
             }
@@ -157,9 +168,18 @@ public class SkillManager : MonoBehaviour
             {
                 enemy.GetComponentInParent<PlayerInputManager>().enabled = true;
             }
+
             enemy.GetComponentInParent<CharacterController>().enabled = true;
-            enemy.GetComponentInParent<NavMeshAgent>().enabled = true;
-            enemy.GetComponentInParent<EnemyAI>().enabled = true;
+
+            if (enemy.GetComponentInParent<NavMeshAgent>() != null)
+            {
+                enemy.GetComponentInParent<NavMeshAgent>().enabled = true;
+            }
+
+            if (enemy.GetComponentInParent<EnemyAI>() != null)
+            {
+                enemy.GetComponentInParent<EnemyAI>().enabled = true;
+            }
         }
     }
     private void OnSkillVikingChieftainEffect(object value)

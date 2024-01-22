@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intervalTime: 5
+  hour: 0
+  minute: 0
   time: {fileID: 3971474258403899}
 --- !u!1 &3546425536093843145
 GameObject:

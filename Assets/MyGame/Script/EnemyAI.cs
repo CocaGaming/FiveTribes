@@ -52,20 +52,29 @@ public class EnemyAI : MonoBehaviour
     public float arenaZone;
 
     private float resetWalkPointSet;
+    private bool isGoHome;
+
+    private Vector3 aiStartPosition;
 
     private void Start()
     {
+        aiStartPosition= this.transform.position;
+
         PlayerAttributes playerAttributes = GetComponent<PlayerAttributes>();
         if (playerAttributes != null)
         {
             attackDamage = playerAttributes.attackPoint;
         }
+
         agent= GetComponent<NavMeshAgent>();
         aiAnim = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+
         attackSpeed = waitToNextAttack;
         skillSpeed = waitToNextSkill;
+
         resetWalkPointSet = 20f;
+        
     }
     private void Update()
     {
@@ -77,16 +86,39 @@ public class EnemyAI : MonoBehaviour
         aiInArena = Physics.CheckSphere(arena.position, arenaZone,allyLayer);
 
         //AI còn ở camp và chưa tới arena hoặc ko ở camp và chưa tới arena
-        if (aiInBaseCamp/* && !aiInArena) || (!aiInBaseCamp && !aiInArena)*/)//đúng giờ mới chạy ra arena
+        if (aiInBaseCamp)//đúng giờ mới chạy ra arena
         {
-            if(GameManager.Instance.hour == 1f)
+            if (GameManager.Instance.hour == 7f)
             {
+                isGoHome = false;
                 RunToArenaPoint();
             }
+
+            if (GameManager.Instance.hour != 7f)//ngoài 7h thì mọi AI đều ở trạng thái idle khi ở trong camp
+            {
+                Vector3 distanceToStartPoint = this.transform.position - aiStartPosition;
+
+                if (distanceToStartPoint.magnitude <= 5f)
+                {
+                    if (ListenerManager.HasInstance)
+                    {
+                        ListenerManager.Instance.BroadCast(ListenType.PLAYER_IDLE, aiAnim);
+                    }
+                }
+            }
+        }
+
+        if (GameManager.Instance.hour == 12f)
+        {
+            RunToBaseCamp();
         }
         //AI đã vào arena
-        if (aiInArena)
+        if (aiInArena && !isGoHome)
         {
+            if (GameManager.Instance.hour == 12f)
+            {
+                isGoHome = true;
+            }
             resetWalkPointSet -=Time.deltaTime;
             if (!enemyInSightRange && !enemyInAttackRange)//chưa thấy enemy và chưa vào tầm đánh
             {
@@ -195,7 +227,7 @@ public class EnemyAI : MonoBehaviour
         {
             ListenerManager.Instance.BroadCast(ListenType.PLAYER_FAST_RUN, aiAnim);
         }
-        agent.SetDestination(baseCamp.position);
+        agent.SetDestination(aiStartPosition);
     }
     private void ChaseEnemy()
     {

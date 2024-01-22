@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInputManager : MonoBehaviour
@@ -14,8 +15,7 @@ public class PlayerInputManager : MonoBehaviour
     private float runSpeed;
     [SerializeField]
     private float waitToNextAttack;
-    [SerializeField]
-    private float waitToNextSkill;
+    public float waitToNextSkill;
     public Transform cameraTransform;
 
     private float horizontalInput;
@@ -44,11 +44,14 @@ public class PlayerInputManager : MonoBehaviour
 
     public float maxStamina;
     public float currentStamina;
+    private float regenStaminaTime;
     public int attackDamage;
 
     public GameObject getHitByWeaponEffect;
     public GameObject getHitByPunchEffect;
     private GameObject getHitEffect;
+
+    public bool isPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +71,17 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        regenStaminaTime -= Time.deltaTime;
+        if (regenStaminaTime <= 0)
+        {
+            regenStaminaTime = 1f;
+            currentStamina += maxStamina/25f;
+            if (currentStamina >= maxStamina)
+            {
+                currentStamina = maxStamina;
+            }
+        }
+
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
@@ -75,7 +89,7 @@ public class PlayerInputManager : MonoBehaviour
         float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
         playerAnim.SetFloat("Input Magnitude", inputMagnitude, 0.05f, Time.deltaTime);
 
-        print($"Vector Magnitude after normalize: {movementDirection.magnitude}");
+        //print($"Vector Magnitude after normalize: {movementDirection.magnitude}");
         movementDirection = Quaternion.AngleAxis(cameraTransform.rotation.eulerAngles.y, Vector3.up) * movementDirection;
         movementDirection.Normalize();
 
@@ -174,6 +188,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Z) && chieftainType!=ChieftainType.UNKNOWN)
             {
+                GetComponent<AttributesManagerPlayer>().playerManaBar.value = 0f;//dùng skill xong thì mana hồi lại từ đầu
                 skillSpeed = waitToNextSkill;
                 if (ListenerManager.HasInstance)
                 {

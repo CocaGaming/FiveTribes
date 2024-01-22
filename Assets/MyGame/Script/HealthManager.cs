@@ -12,6 +12,7 @@ public class HealthManager : MonoBehaviour
     public int currentHealth;
     public Animator playerAnim;
     public bool isInvincible;
+    public bool isDeath;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,15 @@ public class HealthManager : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         isInvincible = false;
     }
+    private void Update()
+    {
+        if (currentHealth > 0)
+        {
+            isDeath = false;
+        }
+        Debug.Log(isDeath);
+    }
+
     public void GetHitBySkill(int attackDamage)
     {
         if (isInvincible == false)
@@ -83,23 +93,28 @@ public class HealthManager : MonoBehaviour
     public void OnDeath()
     {
         GetComponent<CharacterController>().enabled = false;
+
         if(this.GetComponent<PlayerInputManager>() != null)
         {
             GetComponent<PlayerInputManager>().enabled = false;
         }
+
         if(this.GetComponent<NavMeshAgent>() != null)
         {
             GetComponent<NavMeshAgent>().enabled = false;
         }
+
         if(this.GetComponent<EnemyAI>() != null)
         {
             GetComponent<EnemyAI>().enabled = false;
         }
-        Collider[] collider= this.GetComponentsInChildren<Collider>();
+
+        Collider[] collider= this.GetComponentsInChildren<Collider>();//tắt hết collider khi ngủm để ko va chạm với những ai còn sống
         foreach(Collider col in collider)
         {
             col.enabled = false;
         }
+
         this.gameObject.tag = "Death";//Set tag để AICounter trừ ra khi chết
     }
 }
