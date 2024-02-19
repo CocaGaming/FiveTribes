@@ -11,6 +11,7 @@ public class NotifyLoadingGame : BaseNotify
 {
     public TextMeshProUGUI loadingPercentText;
     public Slider loadingSlider;
+
     public override void Init()
     {
         base.Init();
@@ -20,6 +21,8 @@ public class NotifyLoadingGame : BaseNotify
     public override void Show(object data)
     {
         base.Show(data);
+        StopAllCoroutines();
+        StartCoroutine(LoadScene());
     }
     public override void Hide()
     {
@@ -43,7 +46,7 @@ public class NotifyLoadingGame : BaseNotify
                 {
                     UIManager.Instance.ShowOverlap<OverlapFade>();
                 }
-                yield return new WaitForSeconds(2f);//nghĩa là trong 1s ko làm gì hết
+                yield return new WaitForSeconds(3f);//nghĩa là trong 1s ko làm gì hết
                 asyncOperation.allowSceneActivation = true;
                 this.Hide();
             }

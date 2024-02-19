@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerDataTungus
   m_EditorClassIdentifier: 
   playerData:
-    healthPoint: 10
+    healthPoint: 50
     staminaPoint: 5
     attackPoint: 5
     defencePoint: 5

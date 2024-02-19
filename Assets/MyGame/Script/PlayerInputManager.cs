@@ -44,7 +44,8 @@ public class PlayerInputManager : MonoBehaviour
 
     public float maxStamina;
     public float currentStamina;
-    private float regenStaminaTime;
+    public float regenStaminaTime;
+    public float waitToRegenStamina;
     public int attackDamage;
 
     public GameObject getHitByWeaponEffect;
@@ -66,6 +67,9 @@ public class PlayerInputManager : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         attackSpeed = waitToNextAttack;
         skillSpeed = waitToNextSkill;
+
+        waitToRegenStamina = 1f;
+        regenStaminaTime = waitToRegenStamina;
     }
 
     // Update is called once per frame
@@ -74,8 +78,8 @@ public class PlayerInputManager : MonoBehaviour
         regenStaminaTime -= Time.deltaTime;
         if (regenStaminaTime <= 0)
         {
-            regenStaminaTime = 1f;
-            currentStamina += maxStamina/25f;
+            regenStaminaTime = waitToRegenStamina;
+            currentStamina += 0.25f;
             if (currentStamina >= maxStamina)
             {
                 currentStamina = maxStamina;
@@ -274,17 +278,17 @@ public class PlayerInputManager : MonoBehaviour
             }
     }
 
-    private void OnApplicationFocus(bool focus)
-    {
-        if (focus)
-        {
-            Cursor.lockState = CursorLockMode.Locked;//ẩn và lock chuột tại ví trí trung tâm của scene
-        }
-        else
-        {
-            Cursor.lockState= CursorLockMode.None;
-        }
-    }
+    //private void OnApplicationFocus(bool focus)
+    //{
+    //    if (focus)
+    //    {
+    //        Cursor.lockState = CursorLockMode.Locked;//ẩn và lock chuột tại ví trí trung tâm của scene
+    //    }
+    //    else
+    //    {
+    //        Cursor.lockState= CursorLockMode.None;
+    //    }
+    //}
     private void OnDrawGizmosSelected()
     {
         //if (attackPoint != null)

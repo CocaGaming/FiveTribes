@@ -14,11 +14,12 @@ public class OverlapFade : BaseOverlap
     public override void Init()
     {
         base.Init();
-        Fade(2, OnFinish);
+        Fade(3, OnFinish);
     }
     public override void Show(object data)
     {
         base.Show(data);
+        Fade(3, OnFinish);
     }
     public override void Hide()
     {
@@ -45,9 +46,5 @@ public class OverlapFade : BaseOverlap
     private void OnFinish()
     {
         this.Hide();
-        if (UIManager.HasInstance)
-        {
-            UIManager.Instance.ShowScreen<ScreenGame>();
-        }
     }
 }

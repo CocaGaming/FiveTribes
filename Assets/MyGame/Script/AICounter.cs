@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-public class AICounter : MonoBehaviour
+public class AICounter : BaseManager<AICounter> 
 {
     public GameObject[] vikings;
     public GameObject[] orcs;

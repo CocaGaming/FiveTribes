@@ -12,7 +12,6 @@ public class ScreenTribeSelect : BaseScreen
     public GameObject orcVillagerPrefab;
     public GameObject vikingChieftainPrefab;
     public GameObject vikingVillagerPrefab;
-
     public override void Init()
     {
         base.Init();

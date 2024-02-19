@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -43,7 +44,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject getHitByPunchEffect;
     private GameObject getHitEffect;
 
-    public ArrowController arrowPrefab;
+    public ArrowControllerAI arrowPrefab;
     public Transform shootPoint;
 
     public Transform baseCamp;
@@ -107,15 +108,14 @@ public class EnemyAI : MonoBehaviour
                 }
             }
         }
-
-        if (GameManager.Instance.hour == 12f)
+        if (GameManager.Instance.hour == 15f)
         {
             RunToBaseCamp();
         }
         //AI đã vào arena
         if (aiInArena && !isGoHome)
         {
-            if (GameManager.Instance.hour == 12f)
+            if (GameManager.Instance.hour == 15f)
             {
                 isGoHome = true;
             }

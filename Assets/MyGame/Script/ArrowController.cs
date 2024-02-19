@@ -17,6 +17,8 @@ public class ArrowController : MonoBehaviour
     void Start()
     {
         arrowRB =GetComponent<Rigidbody>();
+        
+        attackDamage=FindObjectOfType<PlayerInputManager>().attackDamage;
     }
 
     // Update is called once per frame

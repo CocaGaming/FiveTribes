@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
-    public int maxHealth;
-    public int currentHealth;
+    public float maxHealth;
+    public float currentHealth;
     public Animator playerAnim;
     public bool isInvincible;
     public bool isDeath;
@@ -32,7 +32,6 @@ public class HealthManager : MonoBehaviour
         {
             isDeath = false;
         }
-        Debug.Log(isDeath);
     }
 
     public void GetHitBySkill(int attackDamage)

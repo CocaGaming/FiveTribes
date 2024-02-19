@@ -16,13 +16,13 @@ public class ScreenHome : BaseScreen
     {
         base.Hide();
     }
-    //public void OnClickSettingButton()
-    //{
-    //    if (UIManager.HasInstance)
-    //    {
-    //        UIManager.Instance.ShowPopup<PopupSetting>();
-    //    }
-    //}
+    public void OnClickSettingButton()
+    {
+        if (UIManager.HasInstance)
+        {
+            UIManager.Instance.ShowPopup<PopupSetting>();
+        }
+    }
     public void OnClickStartButton()
     {
         if (UIManager.HasInstance)
@@ -30,5 +30,12 @@ public class ScreenHome : BaseScreen
             UIManager.Instance.ShowScreen<ScreenTutorial>();
         }
         Hide();
+    }
+    public void OnClickQuitButton()
+    {
+        if (UIManager.HasInstance)
+        {
+            UIManager.Instance.ShowPopup<PopupQuit>();
+        }
     }
 }

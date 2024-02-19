@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerDataAsian
   m_EditorClassIdentifier: 
   playerData:
-    healthPoint: 20
-    staminaPoint: 6
-    attackPoint: 6
-    defencePoint: 6
+    healthPoint: 200
+    staminaPoint: 5
+    attackPoint: 5
+    defencePoint: 5

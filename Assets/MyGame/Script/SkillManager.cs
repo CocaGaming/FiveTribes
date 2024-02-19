@@ -15,6 +15,7 @@ public class SkillManager : MonoBehaviour
     public GameObject kickEffect;
     public GameObject titanKickEffect;
     public GameObject roarEffect;
+    public GameObject stunEffect;
     public GameObject roarTitanEffect;
     public GameObject fireHellEffect;
     public GameObject fireHellTitanEffect;
@@ -131,6 +132,9 @@ public class SkillManager : MonoBehaviour
             {
                 if (enemy.GetComponentInParent<HealthManager>().isInvincible == false)
                 {
+                    skillEffect = Instantiate(stunEffect, enemy.transform.position + new Vector3(0, 1.7f, 0), enemy.transform.rotation);
+                    Destroy(skillEffect,skillVikingEffectTime);
+
                     if (ListenerManager.HasInstance)
                     {
                         Animator enemyAnim = enemy.GetComponentInParent<Animator>();
@@ -142,7 +146,7 @@ public class SkillManager : MonoBehaviour
                         enemy.GetComponentInParent<PlayerInputManager>().enabled = false;
                     }
 
-                    enemy.GetComponentInParent<CharacterController>().enabled = false;
+                    //enemy.GetComponentInParent<CharacterController>().enabled = false;
 
                     if (enemy.GetComponentInParent<NavMeshAgent>() != null)
                     {
@@ -162,6 +166,7 @@ public class SkillManager : MonoBehaviour
     private IEnumerator SetDefaultSkillViking(Collider enemy)
     {
         yield return new WaitForSeconds(skillVikingEffectTime);
+
         if (enemy != null && enemy.GetComponentInParent<HealthManager>().currentHealth>0)//nếu còn sống thì mới bật lại
         {
             if (enemy.GetComponentInParent<PlayerInputManager>() != null)
@@ -169,7 +174,7 @@ public class SkillManager : MonoBehaviour
                 enemy.GetComponentInParent<PlayerInputManager>().enabled = true;
             }
 
-            enemy.GetComponentInParent<CharacterController>().enabled = true;
+            //enemy.GetComponentInParent<CharacterController>().enabled = true;
 
             if (enemy.GetComponentInParent<NavMeshAgent>() != null)
             {

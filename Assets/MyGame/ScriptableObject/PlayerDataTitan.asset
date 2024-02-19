@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerDataTitan
   m_EditorClassIdentifier: 
   playerData:
-    healthPoint: 10
-    staminaPoint: 10
-    attackPoint: 5
-    defencePoint: 10
+    healthPoint: 200
+    staminaPoint: 5
+    attackPoint: 10
+    defencePoint: 5

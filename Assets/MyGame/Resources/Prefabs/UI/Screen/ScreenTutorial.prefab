@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: 0, y: 225}
   m_SizeDelta: {x: 210, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2928636047741874412
@@ -171,7 +171,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 300, y: -100}
-  m_SizeDelta: {x: 500, y: 700}
+  m_SizeDelta: {x: 500, y: 775}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8191698331332562252
 CanvasRenderer:
@@ -247,7 +247,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -300, y: -100}
-  m_SizeDelta: {x: 500, y: 700}
+  m_SizeDelta: {x: 500, y: 775}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9052942220286859595
 CanvasRenderer:
@@ -456,7 +456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: 0, y: 225}
   m_SizeDelta: {x: 210, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2559062316303833869
@@ -666,7 +666,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -252}
+  m_AnchoredPosition: {x: 0, y: -275}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1101482632195803869
@@ -709,7 +709,12 @@ MonoBehaviour:
 
     Attack
 
-    Skill'
+    Skill
+
+    Open
+    Shop
+
+    Pause Game'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 641e2d09a9e0fec458dd64db4f3bdc36, type: 2}
   m_sharedMaterial: {fileID: 4850290216091070965, guid: 641e2d09a9e0fec458dd64db4f3bdc36, type: 2}
@@ -1479,7 +1484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -252}
+  m_AnchoredPosition: {x: 0, y: -250}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6169263186033666231
@@ -1527,8 +1532,9 @@ MonoBehaviour:
 
     Z
 
+    F
 
-'
+    ESC'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 641e2d09a9e0fec458dd64db4f3bdc36, type: 2}
   m_sharedMaterial: {fileID: 4850290216091070965, guid: 641e2d09a9e0fec458dd64db4f3bdc36, type: 2}

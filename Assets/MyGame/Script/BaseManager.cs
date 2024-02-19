@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseManager<T> : MonoBehaviour where T : BaseManager<T>
 {
+    public bool isCantDestroy;
     private static T instance;
 
     public static T Instance
@@ -42,7 +43,10 @@ public class BaseManager<T> : MonoBehaviour where T : BaseManager<T>
         if (instance == null)
         {
             instance = (T)this;
-            DontDestroyOnLoad(this);
+            if(isCantDestroy)
+            {
+                DontDestroyOnLoad(this);
+            }
             return true;
         }
         else if (instance == this)

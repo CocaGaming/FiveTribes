@@ -22,6 +22,7 @@ public class ScreenTutorial : BaseScreen
         {
             UIManager.Instance.ShowScreen<ScreenHome>();
         }
+        if (AudioManager.HasInstance)
         Hide();
     }
     public void OnClickNextButton()

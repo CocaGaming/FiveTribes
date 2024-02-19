@@ -17,6 +17,8 @@ public class AttributesManagerPlayer : MonoBehaviour
     public TextMeshProUGUI attackPoint;
     public TextMeshProUGUI defencePoint;
     public TextMeshProUGUI goldText;
+    public TextMeshProUGUI hpText;
+    public TextMeshProUGUI staText;
 
     public int goldAmount;
     public HealthManager[] aiHealthList;
@@ -28,7 +30,7 @@ public class AttributesManagerPlayer : MonoBehaviour
     private void Start()
     { 
         playerManaBar.value = 0f;
-        goldAmount = 0;
+        goldAmount = 500;
 
         PlayerAttributes playerAttributes = GetComponent<PlayerAttributes>();
         if(playerAttributes != null)
@@ -43,11 +45,19 @@ public class AttributesManagerPlayer : MonoBehaviour
     }
     private void Update()
     {
-        playerHealthBar.value= GetComponent<HealthManager>().currentHealth;
+        playerHealthBar.value = GetComponent<HealthManager>().currentHealth;
 
         playerStaminaBar.value = GetComponent<PlayerInputManager>().currentStamina;
 
-        regenManaTime -= Time.deltaTime;
+        attackPoint.text = GetComponent<PlayerInputManager>().attackDamage.ToString();
+
+        defencePoint.text = GetComponent<PlayerAttributes>().defencePoint.ToString();
+
+        hpText.text = GetComponent<HealthManager>().currentHealth.ToString() + "/" + GetComponent<HealthManager>().maxHealth.ToString();
+
+        staText.text=GetComponent<PlayerInputManager>().waitToRegenStamina.ToString("0.0");
+
+         regenManaTime -= Time.deltaTime;
         if (regenManaTime <= 0)
         {
             regenManaTime = 1f;
@@ -63,6 +73,13 @@ public class AttributesManagerPlayer : MonoBehaviour
                 ai.GetComponent<HealthManager>().isDeath = true;
             }
         }
+
+        //Cheat gold
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            goldAmount += 500;
+        }
+
         goldText.text=goldAmount.ToString();
     }
 }

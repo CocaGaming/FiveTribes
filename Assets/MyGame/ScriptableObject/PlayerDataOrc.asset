@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerDataOrc
   m_EditorClassIdentifier: 
   playerData:
-    healthPoint: 20
+    healthPoint: 100
     staminaPoint: 5
     attackPoint: 5
-    defencePoint: 5
+    defencePoint: 10

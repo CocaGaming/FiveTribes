@@ -21,6 +21,7 @@ TagManager:
   - OrcArrow
   - TitanArrow
   - Preview
+  - GameTime
   layers:
   - Default
   - TransparentFX
@@ -39,7 +40,7 @@ TagManager:
   - Terrain
   - BaseGround
   - Model
-  - 
+  - Music
   - 
   - 
   - 
