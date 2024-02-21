@@ -43,6 +43,10 @@ public class PopupSetting : BasePopup
     public void OnClickQuitButton()
     {
         Hide();
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
     }
     public void OnSliderChangeBGMValue(float v)
     {

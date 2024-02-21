@@ -18,10 +18,18 @@ public class PopupQuit : BasePopup
     }
     public void OnYesButton()
     {
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         Application.Quit();
     }
     public void OnNoButton()
     {
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         Time.timeScale = 1f;
         Hide();
     }

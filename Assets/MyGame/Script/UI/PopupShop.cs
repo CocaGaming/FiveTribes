@@ -34,6 +34,10 @@ public class PopupShop : BasePopup
         {
             UIManager.Instance.ShowNotify<NotifyShop>();
         }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         ShopCollider shopCollider= FindObjectOfType<ShopCollider>();
         if (shopCollider != null)
         {
@@ -42,6 +46,10 @@ public class PopupShop : BasePopup
     }
     public void OnBuyAttackPoint()
     {
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         if (shopCollider != null && attributesManagerPlayer!=null)
         {
             if (shopCollider.isOnShop && attributesManagerPlayer.goldAmount>=100)
@@ -61,7 +69,11 @@ public class PopupShop : BasePopup
 
     public void OnBuyDefencePoint()
     {
-        if(shopCollider != null && attributesManagerPlayer!=null)
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
+        if (shopCollider != null && attributesManagerPlayer!=null)
         {
             if(shopCollider.isOnShop && attributesManagerPlayer.goldAmount >= 100)
             {
@@ -80,7 +92,11 @@ public class PopupShop : BasePopup
 
     public void OnBuyHealthPoint()
     {
-        if(shopCollider!=null && attributesManagerPlayer != null)
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
+        if (shopCollider!=null && attributesManagerPlayer != null)
         {
             if(shopCollider.isOnShop && attributesManagerPlayer.goldAmount >= 100)
             {
@@ -107,7 +123,11 @@ public class PopupShop : BasePopup
 
     public void OnBuyStaminaPoint()
     {
-        if(shopCollider != null && attributesManagerPlayer != null)
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
+        if (shopCollider != null && attributesManagerPlayer != null)
         {
             if(shopCollider.isOnShop && attributesManagerPlayer.goldAmount >= 100)
             {

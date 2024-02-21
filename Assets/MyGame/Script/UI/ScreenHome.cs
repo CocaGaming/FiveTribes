@@ -22,6 +22,10 @@ public class ScreenHome : BaseScreen
         {
             UIManager.Instance.ShowPopup<PopupSetting>();
         }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
     }
     public void OnClickStartButton()
     {
@@ -29,10 +33,18 @@ public class ScreenHome : BaseScreen
         {
             UIManager.Instance.ShowScreen<ScreenTutorial>();
         }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         Hide();
     }
     public void OnClickQuitButton()
     {
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ShowPopup<PopupQuit>();

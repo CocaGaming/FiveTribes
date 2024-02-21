@@ -23,6 +23,9 @@ public class ScreenTutorial : BaseScreen
             UIManager.Instance.ShowScreen<ScreenHome>();
         }
         if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         Hide();
     }
     public void OnClickNextButton()
@@ -30,6 +33,10 @@ public class ScreenTutorial : BaseScreen
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ShowScreen<ScreenTribeSelect>();
+        }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
         }
         Hide();
     }

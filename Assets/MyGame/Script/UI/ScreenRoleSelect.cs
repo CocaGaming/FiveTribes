@@ -31,6 +31,10 @@ public class ScreenRoleSelect : BaseScreen
         {
             UIManager.Instance.ShowScreen<ScreenTribeSelect>();
         }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         Hide();
     }
     public void OnClickHomeButton()
@@ -44,6 +48,10 @@ public class ScreenRoleSelect : BaseScreen
         {
             UIManager.Instance.ShowScreen<ScreenHome>();
         }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         Hide();
     }
     public void OnClickChieftainButton()
@@ -56,6 +64,10 @@ public class ScreenRoleSelect : BaseScreen
         {
             UIManager.Instance.ShowNotify<NotifyLoadingGame>();
         }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         Hide();
     }
     public void OnClickVillagerButton()
@@ -67,6 +79,10 @@ public class ScreenRoleSelect : BaseScreen
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ShowNotify<NotifyLoadingGame>();
+        }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
         }
         Hide();
     }

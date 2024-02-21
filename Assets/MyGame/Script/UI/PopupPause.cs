@@ -50,17 +50,29 @@ public class PopupPause : BasePopup
     {
         Time.timeScale = 1f;
         Hide();
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
     }
     public void OnClickHomeButton()
     {
         StartCoroutine(LoadHomeScene());
         Hide();
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
     }
     public void OnClickQuitButton()
     {
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ShowPopup<PopupQuit>();
+        }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
         }
     }
     public void OnSliderChangeBGMValue(float v)

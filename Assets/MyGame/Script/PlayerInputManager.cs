@@ -153,8 +153,11 @@ public class PlayerInputManager : MonoBehaviour
                 {
                     if (this.gameObject.CompareTag("Asian"))
                     {
-                        //thêm đk if this.gameObject.isPlayer==true && enemy.GetComponentInParent<HealthManager>().currentHealth<=0 thì diễn ra sự kiện cộng tiền cho player
-                        enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage,enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
+                        if (AudioManager.HasInstance)
+                        {
+                            AudioManager.Instance.PlaySE(AUDIO.SE_PUNCH);
+                        }
+                        enemy.GetComponentInParent<HealthManager>().GetHitByAttack(attackDamage, enemy.GetComponentInParent<PlayerAttributes>().defencePoint);
                         getHitEffect = Instantiate(getHitByPunchEffect, enemy.transform);
                         Destroy(getHitEffect, 2f);
                     }
@@ -179,11 +182,29 @@ public class PlayerInputManager : MonoBehaviour
                 }
                 if (this.gameObject.CompareTag("Tungus"))
                 {
+                    if (AudioManager.HasInstance)
+                    {
+                        AudioManager.Instance.PlaySE(AUDIO.SE_ARROWFIRING);
+                    }
                     Instantiate(arrowPrefab, shootPoint.position, shootPoint.rotation).SetMoveDirection(shootPoint.forward);
                 }
                 if (this.gameObject.CompareTag("Titan"))
                 {
                     ListenerManager.Instance.BroadCast(ListenType.TITAN_ATTACK_EFFECT, this.gameObject);
+                }
+                if (this.gameObject.CompareTag("Asian"))
+                {
+                    if (AudioManager.HasInstance)
+                    {
+                        AudioManager.Instance.PlaySE(AUDIO.SE_PUNCH);
+                    }
+                }
+                if (this.gameObject.CompareTag("Viking") || this.gameObject.CompareTag("Orc"))
+                {
+                    if (AudioManager.HasInstance)
+                    {
+                        AudioManager.Instance.PlaySE(AUDIO.SE_AXE);
+                    }
                 }
             }
         }
@@ -229,18 +250,34 @@ public class PlayerInputManager : MonoBehaviour
                 }
                 if (chieftainType == ChieftainType.ASIAN)
                 {
+                    if (AudioManager.HasInstance)
+                    {
+                        AudioManager.Instance.PlaySE(AUDIO.SE_KICK);
+                    }
                     ListenerManager.Instance.BroadCast(ListenType.SKILL_ASIAN_CHIEFTAIN_EFFECT, this.gameObject);
                 }
                 if (chieftainType == ChieftainType.VIKING)
                 {
+                    if (AudioManager.HasInstance)
+                    {
+                        AudioManager.Instance.PlaySE(AUDIO.SE_ROAR);
+                    }
                     ListenerManager.Instance.BroadCast(ListenType.SKILL_VIKING_CHIEFTAIN_EFFECT, this.gameObject);
                 }
                 if (chieftainType == ChieftainType.ORC)
                 {
+                    if (AudioManager.HasInstance)
+                    {
+                        AudioManager.Instance.PlaySE(AUDIO.SE_FIRE);
+                    }
                     ListenerManager.Instance.BroadCast(ListenType.SKILL_ORC_CHIEFTAIN_EFFECT, this.gameObject);
                 }
                 if (chieftainType == ChieftainType.TUNGUS)
                 {
+                    if (AudioManager.HasInstance)
+                    {
+                        AudioManager.Instance.PlaySE(AUDIO.SE_HEAL);
+                    }
                     ListenerManager.Instance.BroadCast(ListenType.SKILL_TUNGUS_CHIEFTAIN_EFFECT, this.gameObject);
                 }
                 if (chieftainType == ChieftainType.TITAN_ASIAN)

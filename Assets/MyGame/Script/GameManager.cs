@@ -64,7 +64,7 @@ public class GameManager : BaseManager<GameManager>
         {
             if (AudioManager.HasInstance)
             {
-                AudioManager.Instance.PlaySE(AUDIO.SE_WARHORN);
+                AudioManager.Instance.PlayLongSE(AUDIO.LONGSE_WARHORN);
             }
 
             if (UIManager.HasInstance)
@@ -86,7 +86,7 @@ public class GameManager : BaseManager<GameManager>
         {
             if (AudioManager.HasInstance)
             {
-                AudioManager.Instance.PlaySE(AUDIO.SE_WARHORN);
+                AudioManager.Instance.PlayLongSE(AUDIO.LONGSE_WARHORN);
             }
 
             if (UIManager.HasInstance)

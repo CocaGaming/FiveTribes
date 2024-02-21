@@ -30,6 +30,10 @@ public class ScreenTribeSelect : BaseScreen
         {
             UIManager.Instance.ShowScreen<ScreenTutorial>();
         }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         Hide();
     }
     public void OnClickHomeButton()
@@ -37,6 +41,10 @@ public class ScreenTribeSelect : BaseScreen
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ShowScreen<ScreenHome>();
+        }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
         }
         Hide();
     }
@@ -52,6 +60,10 @@ public class ScreenTribeSelect : BaseScreen
         {
             UIManager.Instance.ShowScreen<ScreenRoleSelect>();
         }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         Hide();
     }
     public void OnClickOrcButton()
@@ -65,6 +77,10 @@ public class ScreenTribeSelect : BaseScreen
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ShowScreen<ScreenRoleSelect>();
+        }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
         }
         Hide();
     }
@@ -80,6 +96,10 @@ public class ScreenTribeSelect : BaseScreen
         {
             UIManager.Instance.ShowScreen<ScreenRoleSelect>();
         }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
+        }
         Hide();
     }
     public void OnClickAsianButton()
@@ -93,6 +113,10 @@ public class ScreenTribeSelect : BaseScreen
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ShowScreen<ScreenRoleSelect>();
+        }
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
         }
         Hide();
     }
