@@ -22,6 +22,7 @@ TagManager:
   - TitanArrow
   - Preview
   - GameTime
+  - FirePreview
   layers:
   - Default
   - TransparentFX
@@ -58,4 +59,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 1
+    uniqueID: 901946603
     locked: 0

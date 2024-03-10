@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d302b013a94aabb46afbc7183ddf5b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyEffect: {fileID: 1919543859444104, guid: 0796b331004a84744a609063dc845137, type: 3}
 --- !u!1 &1031625662149752708
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,7 +30,7 @@ public class AttributesManagerPlayer : MonoBehaviour
     private void Start()
     { 
         playerManaBar.value = 0f;
-        goldAmount = 500;
+        goldAmount = 0;
 
         PlayerAttributes playerAttributes = GetComponent<PlayerAttributes>();
         if(playerAttributes != null)

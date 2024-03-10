@@ -19,6 +19,7 @@ public class AUDIO
     public const string SE_FIRE = "Fire";
     public const string SE_HEAL = "Heal";
     public const string SE_BUTTON = "Button";
+    public const string SE_OPENSHOP = "OpenShop";
 
     public const string LONGSE_WARHORN = "WarHorn";
 }

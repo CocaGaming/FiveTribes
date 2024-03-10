@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScreenTribeSelect : BaseScreen
 {
@@ -12,6 +13,7 @@ public class ScreenTribeSelect : BaseScreen
     public GameObject orcVillagerPrefab;
     public GameObject vikingChieftainPrefab;
     public GameObject vikingVillagerPrefab;
+
     public override void Init()
     {
         base.Init();
@@ -26,6 +28,12 @@ public class ScreenTribeSelect : BaseScreen
     }
     public void OnClickBackButton()
     {
+        GameObject[] preview = GameObject.FindGameObjectsWithTag("FirePreview");
+        foreach (GameObject go in preview)
+        {
+            Destroy(go);
+        }
+
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ShowScreen<ScreenTutorial>();
@@ -38,6 +46,7 @@ public class ScreenTribeSelect : BaseScreen
     }
     public void OnClickHomeButton()
     {
+
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ShowScreen<ScreenHome>();
@@ -50,7 +59,8 @@ public class ScreenTribeSelect : BaseScreen
     }
     public void OnClickTungusButton()
     {
-        if(GameManager.HasInstance)
+
+        if (GameManager.HasInstance)
         {
            GameManager.Instance.tribeType = TribeType.TUNGUS;
         }
@@ -68,6 +78,7 @@ public class ScreenTribeSelect : BaseScreen
     }
     public void OnClickOrcButton()
     {
+
         if (GameManager.HasInstance)
         {
             GameManager.Instance.tribeType = TribeType.ORC;
@@ -86,6 +97,7 @@ public class ScreenTribeSelect : BaseScreen
     }
     public void OnClickVikingButton()
     {
+
         if (GameManager.HasInstance)
         {
             GameManager.Instance.tribeType = TribeType.VIKING;
@@ -104,6 +116,7 @@ public class ScreenTribeSelect : BaseScreen
     }
     public void OnClickAsianButton()
     {
+
         if (GameManager.HasInstance)
         {
             GameManager.Instance.tribeType = TribeType.ASIAN;

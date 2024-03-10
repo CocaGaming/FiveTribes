@@ -18,6 +18,7 @@ public class GameManager : BaseManager<GameManager>
     private bool isEndWarTime;
     private bool isLoseGame;
     private bool isWinGame;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,7 +73,7 @@ public class GameManager : BaseManager<GameManager>
                 UIManager.Instance.ShowPopup<PopupTutorial>();
             }
         }
-        if (hour == 7f && minute==0f)
+        if (hour == 9f && minute==0f)
         {
             isWarTime = true;
         }
@@ -94,7 +95,7 @@ public class GameManager : BaseManager<GameManager>
                 UIManager.Instance.ShowPopup<PopupBackToBaseCamp>();
             }
         }
-        if (hour == 15f && minute == 0f)
+        if (hour == 17f && minute == 0f)
         {
             isEndWarTime = true;
         }
@@ -260,24 +261,42 @@ public class GameManager : BaseManager<GameManager>
 
         yield return new WaitForSeconds(5f);
 
-        if (UIManager.HasInstance)
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Loading");
+        asyncOperation.allowSceneActivation = false;//khi scene chưa load xong thì chưa cho hiện
+        while (!asyncOperation.isDone)
         {
-            UIManager.Instance.ShowOverlap<OverlapFade>();
-        }
-        yield return new WaitForSeconds(3f);
+            if (asyncOperation.progress >= 0.9f)
+            {
+                if (UIManager.HasInstance)
+                {
+                    UIManager.Instance.ShowOverlap<OverlapFade>();
+                    OverlapFade overlapFade = UIManager.Instance.GetExistOverlap<OverlapFade>();
+                    if (overlapFade != null)
+                    {
+                        overlapFade.Fade(3f,
+                            onDuringFade: () =>
+                            {
+                                asyncOperation.allowSceneActivation = true;
+                                if (UIManager.HasInstance)
+                                {
+                                    UIManager.Instance.ShowScreen<ScreenHome>();
+                                    UIManager.Instance.HidePopup<PopupLose>();
+                                }
 
-        //Load lại scene loading
-        SceneManager.LoadScene(0);
+                                if (AudioManager.HasInstance)
+                                {
+                                    AudioManager.Instance.PlayBGM(AUDIO.BGM_MENU);
+                                }
+                            },
+                            onFinish: () =>
+                            {
 
-        if (UIManager.HasInstance)
-        {
-            UIManager.Instance.ShowScreen<ScreenHome>();
-            UIManager.Instance.HidePopup<PopupLose>();
-        }
-
-        if (AudioManager.HasInstance)
-        {
-            AudioManager.Instance.PlayBGM(AUDIO.BGM_MENU);
+                            });
+                    }
+                }
+                yield return new WaitForSeconds(3f);//nghĩa là trong 1s ko làm gì hết
+            }
+            yield return null;//để thoát ra khỏi vòng while
         }
     }
     private IEnumerator WinLoadHomeScene()
@@ -297,24 +316,83 @@ public class GameManager : BaseManager<GameManager>
 
         yield return new WaitForSeconds(5f);
 
-        if (UIManager.HasInstance)
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Loading");
+        asyncOperation.allowSceneActivation = false;//khi scene chưa load xong thì chưa cho hiện
+        while (!asyncOperation.isDone)
         {
-            UIManager.Instance.ShowOverlap<OverlapFade>();
+            if (asyncOperation.progress >= 0.9f)
+            {
+                if (UIManager.HasInstance)
+                {
+                    UIManager.Instance.ShowOverlap<OverlapFade>();
+                    OverlapFade overlapFade = UIManager.Instance.GetExistOverlap<OverlapFade>();
+                    if (overlapFade != null)
+                    {
+                        overlapFade.Fade(3f,
+                            onDuringFade: () =>
+                            {
+                                asyncOperation.allowSceneActivation = true;
+                                if (UIManager.HasInstance)
+                                {
+                                    UIManager.Instance.ShowScreen<ScreenHome>();
+                                    UIManager.Instance.HidePopup<PopupWin>();
+                                }
+
+                                if (AudioManager.HasInstance)
+                                {
+                                    AudioManager.Instance.PlayBGM(AUDIO.BGM_MENU);
+                                }
+                            },
+                            onFinish: () =>
+                            {
+
+                            });
+                    }
+                }
+                yield return new WaitForSeconds(3f);//nghĩa là trong 1s ko làm gì hết
+            }
+            yield return null;//để thoát ra khỏi vòng while
         }
-        yield return new WaitForSeconds(3f);
+    }
+    private IEnumerator LoadScene()
+    {
+        yield return null;
 
-        //Load lại scene loading
-        SceneManager.LoadScene(0);
-
-        if (UIManager.HasInstance)
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("FiveTribes");
+        asyncOperation.allowSceneActivation = false;//khi scene chưa load xong thì chưa cho hiện
+        while (!asyncOperation.isDone)
         {
-            UIManager.Instance.ShowScreen<ScreenHome>();
-            UIManager.Instance.HidePopup<PopupWin>();
-        }
+            if (asyncOperation.progress >= 0.9f)
+            {
+                if (UIManager.HasInstance)
+                {
+                    UIManager.Instance.ShowOverlap<OverlapFade>();
+                    OverlapFade overlapFade = UIManager.Instance.GetExistOverlap<OverlapFade>();
+                    if (overlapFade != null)
+                    {
+                        overlapFade.Fade(3f,
+                            onDuringFade: () =>
+                            {
+                                asyncOperation.allowSceneActivation = true;
+                            },
+                            onFinish: () =>
+                            {
 
-        if (AudioManager.HasInstance)
-        {
-            AudioManager.Instance.PlayBGM(AUDIO.BGM_MENU);
+                            });
+                    }
+                }
+                yield return new WaitForSeconds(3f);//nghĩa là trong 1s ko làm gì hết
+            }
+            yield return null;//để thoát ra khỏi vòng while
         }
+        if (CharacterSelect.HasInstance)
+        {
+            CharacterSelect.Instance.SetCharacter();
+        }
+    }
+
+    public void LoadSceneGame()
+    {
+        StartCoroutine(LoadScene());
     }
 }

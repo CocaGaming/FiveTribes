@@ -32,7 +32,7 @@ public class NotifyLoadingGame : BaseNotify
     {
         yield return null;
 
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("FiveTribes");
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Intro 1");
         asyncOperation.allowSceneActivation = false;//khi scene chưa load xong thì chưa cho hiện
         while (!asyncOperation.isDone)
         {
@@ -40,22 +40,32 @@ public class NotifyLoadingGame : BaseNotify
             loadingPercentText.SetText($"LOADING: {asyncOperation.progress * 100}%");
             if (asyncOperation.progress >= 0.9f)
             {
-                loadingSlider.value = 1f;
-                loadingPercentText.SetText($"LOADING: {loadingSlider.value * 100}%");
+                
                 if (UIManager.HasInstance)
                 {
                     UIManager.Instance.ShowOverlap<OverlapFade>();
+                    loadingSlider.value = 1f;
+                    loadingPercentText.SetText($"LOADING: {loadingSlider.value * 100}%");
+                    OverlapFade overlapFade = UIManager.Instance.GetExistOverlap<OverlapFade>();
+                    if (overlapFade != null)
+                    {
+                        overlapFade.Fade(3f,
+                            onDuringFade: () =>
+                            {
+                                asyncOperation.allowSceneActivation = true;
+                            },
+                            onFinish: () =>
+                            {
+
+                            });
+                    }
                 }
                 yield return new WaitForSeconds(3f);//nghĩa là trong 1s ko làm gì hết
-                asyncOperation.allowSceneActivation = true;
+                //asyncOperation.allowSceneActivation = true;
                 this.Hide();
             }
             yield return null;//để thoát ra khỏi vòng while
             
-        }
-        if (CharacterSelect.HasInstance)
-        {
-            CharacterSelect.Instance.SetCharacter();
         }
     }
 }

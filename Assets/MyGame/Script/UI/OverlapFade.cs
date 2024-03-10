@@ -14,12 +14,12 @@ public class OverlapFade : BaseOverlap
     public override void Init()
     {
         base.Init();
-        Fade(3, OnFinish);
+        //Fade(3f);
     }
     public override void Show(object data)
     {
         base.Show(data);
-        Fade(3, OnFinish);
+        //Fade(3f);
     }
     public override void Hide()
     {
@@ -31,20 +31,21 @@ public class OverlapFade : BaseOverlap
         cl.a = alp;
         this.imgFade.color = cl;
     }
-    public void Fade(float fadeTime, Action onFinish)
+    public void Fade(float fadeTime,Action onDuringFade=null, Action onFinish=null)
     {
         imgFade.color = fadeColor;
         SetAlpha(0);
         Sequence seq = DOTween.Sequence();
         seq.Append(this.imgFade.DOFade(1f, fadeTime));
+        seq.AppendCallback(() =>
+        {
+            onDuringFade?.Invoke();
+        });
         seq.Append(this.imgFade.DOFade(0, fadeTime));
         seq.OnComplete(() =>
         {
             onFinish?.Invoke();
+            this.Hide();
         });
-    }
-    private void OnFinish()
-    {
-        this.Hide();
     }
 }

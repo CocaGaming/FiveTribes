@@ -89,13 +89,13 @@ public class EnemyAI : MonoBehaviour
         //AI còn ở camp và chưa tới arena hoặc ko ở camp và chưa tới arena
         if (aiInBaseCamp)//đúng giờ mới chạy ra arena
         {
-            if (GameManager.Instance.hour == 7f)
+            if (GameManager.Instance.hour == 9f)
             {
                 isGoHome = false;
                 RunToArenaPoint();
             }
 
-            if (GameManager.Instance.hour != 7f)//ngoài 7h thì mọi AI đều ở trạng thái idle khi ở trong camp
+            if (GameManager.Instance.hour != 9f)//ngoài 9h thì mọi AI đều ở trạng thái idle khi ở trong camp
             {
                 Vector3 distanceToStartPoint = this.transform.position - aiStartPosition;
 
@@ -108,14 +108,14 @@ public class EnemyAI : MonoBehaviour
                 }
             }
         }
-        if (GameManager.Instance.hour == 15f)
+        if (GameManager.Instance.hour == 17f)
         {
             RunToBaseCamp();
         }
         //AI đã vào arena
         if (aiInArena && !isGoHome)
         {
-            if (GameManager.Instance.hour == 15f)
+            if (GameManager.Instance.hour == 17f)
             {
                 isGoHome = true;
             }

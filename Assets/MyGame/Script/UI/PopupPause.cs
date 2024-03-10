@@ -59,6 +59,10 @@ public class PopupPause : BasePopup
     {
         StartCoroutine(LoadHomeScene());
         Hide();
+        if(UIManager.HasInstance)
+        {
+            UIManager.Instance.HideNotify<NotifyShop>();
+        }
         if (AudioManager.HasInstance)
         {
             AudioManager.Instance.PlaySE(AUDIO.SE_BUTTON);
@@ -104,23 +108,43 @@ public class PopupPause : BasePopup
 
         gameTime.SetActive(false);//tắt đồng hồ để khi load lại scene sẽ reset giờ lại
 
-        if (UIManager.HasInstance)
-        {
-            UIManager.Instance.ShowOverlap<OverlapFade>();
-        }
-        yield return new WaitForSeconds(3f);
+        yield return null;
 
-        //Load lại scene loading
-        SceneManager.LoadScene(0);
-
-        if (UIManager.HasInstance)
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Loading");
+        asyncOperation.allowSceneActivation = false;//khi scene chưa load xong thì chưa cho hiện
+        while (!asyncOperation.isDone)
         {
-            UIManager.Instance.ShowScreen<ScreenHome>();
-        }
+            if (asyncOperation.progress >= 0.9f)
+            {
+                if (UIManager.HasInstance)
+                {
+                    UIManager.Instance.ShowOverlap<OverlapFade>();
+                    OverlapFade overlapFade = UIManager.Instance.GetExistOverlap<OverlapFade>();
+                    if (overlapFade != null)
+                    {
+                        overlapFade.Fade(3f,
+                            onDuringFade: () =>
+                            {
+                                asyncOperation.allowSceneActivation = true;
+                                if (UIManager.HasInstance)
+                                {
+                                    UIManager.Instance.ShowScreen<ScreenHome>();
+                                }
 
-        if (AudioManager.HasInstance)
-        {
-            AudioManager.Instance.PlayBGM(AUDIO.BGM_MENU);
+                                if (AudioManager.HasInstance)
+                                {
+                                    AudioManager.Instance.PlayBGM(AUDIO.BGM_MENU);
+                                }
+                            },
+                            onFinish: () =>
+                            {
+                              
+                            });
+                    }
+                }
+                yield return new WaitForSeconds(3f);//nghĩa là trong 1s ko làm gì hết
+            }
+            yield return null;//để thoát ra khỏi vòng while
         }
     }
 }

@@ -1557,5 +1557,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbad89702cfdc249a5708a6851fab3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chieftainPreview: {fileID: 768927588197490402}
-  villagerPreview: {fileID: 240080101165137589}
+  firePrefab: {fileID: 2063944170905051191, guid: 0da441d551eb9e84a95539be7301f164, type: 3}

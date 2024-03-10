@@ -16,6 +16,10 @@ public class ShopCollider : MonoBehaviour
                 UIManager.Instance.ShowPopup<PopupShop>();
                 UIManager.Instance.HideNotify<NotifyShop>();
             }
+            if (AudioManager.HasInstance)
+            {
+                AudioManager.Instance.PlaySE(AUDIO.SE_OPENSHOP);
+            }
             defencePoint = other.GetComponent<PlayerAttributes>().defencePoint;
             isOnShop = true;
         }

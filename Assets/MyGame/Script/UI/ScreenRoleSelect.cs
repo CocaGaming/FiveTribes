@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class ScreenRoleSelect : BaseScreen
 {
-    public RawImage chieftainPreview;
-    public RawImage villagerPreview;
-
     public override void Init()
     {
         base.Init();
@@ -22,6 +19,7 @@ public class ScreenRoleSelect : BaseScreen
     }
     public void OnClickBackButton()
     {
+
         GameObject[] preview = GameObject.FindGameObjectsWithTag("Preview");
         foreach (GameObject go in preview)
         {
