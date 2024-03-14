@@ -73,7 +73,7 @@ public class GameManager : BaseManager<GameManager>
                 UIManager.Instance.ShowPopup<PopupTutorial>();
             }
         }
-        if (hour == 9f && minute==0f)
+        if (hour == 10f && minute==0f)
         {
             isWarTime = true;
         }
@@ -95,7 +95,7 @@ public class GameManager : BaseManager<GameManager>
                 UIManager.Instance.ShowPopup<PopupBackToBaseCamp>();
             }
         }
-        if (hour == 17f && minute == 0f)
+        if (hour == 18f && minute == 0f)
         {
             isEndWarTime = true;
         }
